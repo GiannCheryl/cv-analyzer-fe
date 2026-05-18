@@ -167,7 +167,6 @@ export default function AnalyzerPage() {
           <div className="input-grid">
             <div className="input-group">
               <label className="input-label">
-                <span className="label-icon">📄</span>
                 Upload CV (PDF / DOC / DOCX)
               </label>
               <div
@@ -211,7 +210,6 @@ export default function AnalyzerPage() {
 
             <div className="input-group">
               <label className="input-label">
-                <span className="label-icon">💼</span>
                 Deskripsi Pekerjaan (Job Description)
               </label>
               <textarea
@@ -277,7 +275,7 @@ export default function AnalyzerPage() {
 
       {result && !loading && (
         <section id="result-section" className="result-section">
-          <h2 className="section-title">📊 Result Analysis</h2>
+          <h2 className="section-title">Result Analysis</h2>
           <div className="domain-badge">
             <span className="domain-label">Detected Field:</span>
             <span className="domain-value">{result.domain}</span>
@@ -350,7 +348,6 @@ export default function AnalyzerPage() {
 
               <div className="result-card">
                 <h3 className="card-title">
-                  <span className="title-icon">🎯</span>
                   Rekomendasi Posisi Lain
                 </h3>
                 <div className="positions-list">
@@ -370,7 +367,6 @@ export default function AnalyzerPage() {
             <div className="result-column">
               <div className="result-card">
                 <h3 className="card-title">
-                  <span className="title-icon">📝</span>
                   Ringkasan Analisis
                 </h3>
                 <p className="summary-text">{result.auto_summary}</p>
@@ -379,7 +375,6 @@ export default function AnalyzerPage() {
               {result.cv_summary && (
                 <div className="result-card">
                   <h3 className="card-title">
-                    <span className="title-icon">📋</span>
                     Ringkasan CV
                   </h3>
                   <div className="cv-summary">
@@ -433,7 +428,6 @@ export default function AnalyzerPage() {
 
               <div className="result-card">
                 <h3 className="card-title">
-                  <span className="title-icon">⚠️</span>
                   Skill yang Perlu Dikembangkan
                 </h3>
                 <div className="skills-section">
@@ -466,7 +460,6 @@ export default function AnalyzerPage() {
 
               <div className="result-card">
                 <h3 className="card-title">
-                  <span className="title-icon">🚀</span>
                   Rencana Pengembangan
                 </h3>
                 <ol className="action-plan">
@@ -483,7 +476,6 @@ export default function AnalyzerPage() {
 
           <div className="analyze-again">
             <button className="btn btn-primary" onClick={handleReset}>
-              <span>🔄</span>
               Analisis CV Lain
             </button>
           </div>
