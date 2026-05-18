@@ -68,14 +68,12 @@ export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
             className={`header-tab ${mode === "login" ? "active" : ""}`}
             onClick={() => switchMode("login")}
           >
-            <span className="tab-icon">🔐</span>
             <span className="tab-text">Masuk</span>
           </button>
           <button
             className={`header-tab ${mode === "register" ? "active" : ""}`}
             onClick={() => switchMode("register")}
           >
-            <span className="tab-icon">✨</span>
             <span className="tab-text">Daftar</span>
           </button>
         </div>

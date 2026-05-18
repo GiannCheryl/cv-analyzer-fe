@@ -1171,10 +1171,6 @@ body {
   background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
 }
 
-.tab-icon {
-  font-size: 1.125rem;
-}
-
 .modal-body {
   padding: 2rem;
 }
