@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 
-const API_URL = process.env.REACT_API_URL || "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 // Enable cookies for axios
 axios.defaults.withCredentials = true;
