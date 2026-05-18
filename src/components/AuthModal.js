@@ -91,7 +91,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
 
           {error && (
             <div className="auth-error">
-              <span>⚠️</span> {error}
+              {error}
             </div>
           )}
 
@@ -160,7 +160,6 @@ export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
                 </>
               ) : (
                 <>
-                  <span>{mode === "login" ? "🔓" : "🚀"}</span>
                   {mode === "login" ? "Masuk" : "Daftar Sekarang"}
                 </>
               )}
