@@ -71,7 +71,7 @@ export default function HomePage({ onLoginClick, onRegisterClick }) {
         <h2>Siap Menganalisis CV Anda?</h2>
         <p>Daftar sekarang dan dapatkan analisis pertama Anda secara gratis!</p>
         <button className="btn btn-primary btn-lg" onClick={onRegisterClick}>
-          <span>✨</span> Daftar Sekarang
+          Daftar Sekarang
         </button>
       </section>
     </div>

@@ -1192,7 +1192,7 @@ body {
 
 .modal-close {
   position: absolute;
-  top: 1rem;
+  top: 0.75rem;
   right: 1rem;
   width: 32px;
   height: 32px;
@@ -1207,6 +1207,8 @@ body {
   color: var(--gray-500);
   transition: all 0.2s;
   z-index: 10;
+  line-height: 1;
+  padding: 0;
 }
 
 .modal-close:hover {
