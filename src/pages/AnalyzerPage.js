@@ -4,8 +4,17 @@ import { useAuth } from "../context/AuthContext";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
-// Enable cookies for axios
-axios.defaults.withCredentials = true;
+const api = axios.create({
+  baseURL: API_URL,
+});
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
 export default function AnalyzerPage() {
   const { user } = useAuth();
@@ -77,7 +86,7 @@ export default function AnalyzerPage() {
       formData.append("file", resumeFile);
       formData.append("job_desc", jobDesc);
 
-      const response = await axios.post(`${API_URL}/analyze`, formData, {
+      const response = await api.post("/analyze", formData, {
         headers: { "Content-Type": "multipart/form-data" },
         timeout: 120000,
       });
@@ -85,24 +94,20 @@ export default function AnalyzerPage() {
       if (response.data.success) {
         setResult(response.data);
 
-        // Save to history if logged in (session will handle auth)
         if (user) {
           try {
-            await axios.post(
-              `${API_URL}/api/history`,
-              {
-                job_desc: jobDesc,
-                file_name: fileName,
-                domain: response.data.domain,
-                match_score: response.data.match_score,
-                match_percentage: response.data.match_percentage,
-                auto_summary: response.data.auto_summary,
-                skills_analysis: response.data.skills_analysis,
-                cv_summary: response.data.cv_summary,
-                role_compatibility: response.data.role_compatibility,
-                action_plan: response.data.action_plan,
-              }
-            );
+            await api.post("/api/history", {
+              job_desc: jobDesc,
+              file_name: fileName,
+              domain: response.data.domain,
+              match_score: response.data.match_score,
+              match_percentage: response.data.match_percentage,
+              auto_summary: response.data.auto_summary,
+              skills_analysis: response.data.skills_analysis,
+              cv_summary: response.data.cv_summary,
+              role_compatibility: response.data.role_compatibility,
+              action_plan: response.data.action_plan,
+            });
             setSaveStatus("Analisis tersimpan di history");
           } catch (saveErr) {
             console.error("Failed to save history:", saveErr);

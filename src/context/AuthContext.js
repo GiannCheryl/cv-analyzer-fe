@@ -3,8 +3,17 @@ import axios from "axios";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
-// Configure axios to send cookies with every request
-axios.defaults.withCredentials = true;
+const api = axios.create({
+  baseURL: API_URL,
+});
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
 const AuthContext = createContext();
 
@@ -15,45 +24,50 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const checkSession = async () => {
+    const checkAuth = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setLoading(false);
+        return;
+      }
       try {
-        const response = await axios.get(`${API_URL}/api/auth/me`);
+        const response = await api.get("/api/auth/me");
         setUser(response.data.user);
       } catch (err) {
-        // Not logged in, that's ok
+        localStorage.removeItem("token");
         setUser(null);
       } finally {
         setLoading(false);
       }
     };
-    checkSession();
+    checkAuth();
   }, []);
 
   const login = async (email, password) => {
-    const response = await axios.post(`${API_URL}/api/auth/login`, {
+    const response = await api.post("/api/auth/login", {
       email,
       password,
     });
-    setUser(response.data.user);
-    return response.data.user;
+    const { token, user } = response.data;
+    localStorage.setItem("token", token);
+    setUser(user);
+    return user;
   };
 
   const register = async (name, email, password) => {
-    const response = await axios.post(`${API_URL}/api/auth/register`, {
+    const response = await api.post("/api/auth/register", {
       name,
       email,
       password,
     });
-    setUser(response.data.user);
-    return response.data.user;
+    const { token, user } = response.data;
+    localStorage.setItem("token", token);
+    setUser(user);
+    return user;
   };
 
-  const logout = async () => {
-    try {
-      await axios.post(`${API_URL}/api/auth/logout`);
-    } catch (err) {
-      console.error("Logout error:", err);
-    }
+  const logout = () => {
+    localStorage.removeItem("token");
     setUser(null);
   };
 

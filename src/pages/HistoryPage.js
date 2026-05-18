@@ -5,8 +5,17 @@ import { useNavigate } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
-// Enable cookies for axios
-axios.defaults.withCredentials = true;
+const api = axios.create({
+  baseURL: API_URL,
+});
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
 export default function HistoryPage() {
   const { isAuthenticated } = useAuth();
@@ -27,7 +36,7 @@ export default function HistoryPage() {
   const fetchHistory = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/api/history`);
+      const response = await api.get("/api/history");
       setHistory(response.data.history || []);
     } catch (err) {
       setError("Gagal memuat history analisis");
@@ -40,7 +49,7 @@ export default function HistoryPage() {
   const deleteHistoryItem = async (id) => {
     if (!window.confirm("Yakin ingin menghapus analisis ini?")) return;
     try {
-      await axios.delete(`${API_URL}/api/history/${id}`);
+      await api.delete(`/api/history/${id}`);
       setHistory(history.filter((item) => item.id !== id));
       if (selectedItem?.id === id) setSelectedItem(null);
     } catch (err) {
