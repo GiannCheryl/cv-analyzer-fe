@@ -15,8 +15,8 @@ export default function HomePage({ onLoginClick, onRegisterClick }) {
     },
     {
       icon: "📊",
-      title: "AI Analysis",
-      desc: "Analisis otomatis dengan kecerdasan buatan",
+      title: "Analysis",
+      desc: "Analisis otomatis untuk melihat kecocokan CV dan deskripsi pekerjaan",
     },
     {
       icon: "🔍",
