@@ -20,8 +20,8 @@ export default function HomePage({ onLoginClick, onRegisterClick }) {
     },
     {
       icon: "🔍",
-      title: "Detail Report",
-      desc: "Laporan lengkap kecocokan skill dan rekomendasi",
+      title: "History",
+      desc: "Riwayat lengkap kecocokan skill dan rekomendasi",
     },
   ];
 
