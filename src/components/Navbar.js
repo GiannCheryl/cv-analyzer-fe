@@ -43,11 +43,11 @@ export default function Navbar({ onLoginClick, onRegisterClick }) {
                 </div>
                 <div className="dropdown-divider"></div>
                 <Link to="/history" className="dropdown-item" onClick={() => setShowDropdown(false)}>
-                  <span>🔍</span> History Analisis
+                  History Analisis
                 </Link>
                 <div className="dropdown-divider"></div>
                 <button className="dropdown-item logout-item" onClick={handleLogout}>
-                  <span>🚪</span> Keluar
+                  Keluar
                 </button>
               </div>
             )}

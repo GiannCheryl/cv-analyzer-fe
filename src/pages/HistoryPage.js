@@ -104,11 +104,10 @@ export default function HistoryPage() {
 
       {history.length === 0 ? (
         <div className="history-empty">
-          <div className="empty-icon">📭</div>
           <h3>Belum Ada History</h3>
           <p>Anda belum melakukan analisis CV. Mulai analisis pertama Anda!</p>
           <button className="btn btn-primary" onClick={() => navigate("/analyze")}>
-            <span>🔍</span> Analisis CV Sekarang
+            Analisis CV Sekarang
           </button>
         </div>
       ) : (
@@ -158,18 +157,18 @@ export default function HistoryPage() {
                 </div>
 
                 <div className="detail-meta">
-                  <p><strong>📄 File:</strong> {selectedItem.file_name}</p>
-                  <p><strong>🕐 Tanggal:</strong> {formatDate(selectedItem.created_at)}</p>
+                  <p><strong>File:</strong> {selectedItem.file_name}</p>
+                  <p><strong>Tanggal:</strong> {formatDate(selectedItem.created_at)}</p>
                 </div>
 
                 <div className="detail-section">
-                  <h3>📝 Ringkasan</h3>
+                  <h3>Ringkasan</h3>
                   <p>{selectedItem.auto_summary}</p>
                 </div>
 
                 {selectedItem.skills_analysis?.hard_skill_matches?.length > 0 && (
                   <div className="detail-section">
-                    <h3>✅ Hard Skills Cocok</h3>
+                    <h3>Hard Skills Cocok</h3>
                     <div className="detail-tags">
                       {selectedItem.skills_analysis.hard_skill_matches.map((skill, i) => (
                         <span key={i} className="tag tag-success">{skill}</span>
@@ -180,7 +179,7 @@ export default function HistoryPage() {
 
                 {selectedItem.skills_analysis?.soft_skill_matches?.length > 0 && (
                   <div className="detail-section">
-                    <h3>✅ Soft Skills Cocok</h3>
+                    <h3>Soft Skills Cocok</h3>
                     <div className="detail-tags">
                       {selectedItem.skills_analysis.soft_skill_matches.map((skill, i) => (
                         <span key={i} className="tag tag-success-soft">{skill}</span>
@@ -191,7 +190,7 @@ export default function HistoryPage() {
 
                 {selectedItem.skills_analysis?.missing_hard_skills?.length > 0 && (
                   <div className="detail-section">
-                    <h3>⚠️ Hard Skills Kurang</h3>
+                    <h3>Hard Skills Kurang</h3>
                     <div className="detail-tags">
                       {selectedItem.skills_analysis.missing_hard_skills.map((skill, i) => (
                         <span key={i} className="tag tag-danger">{skill}</span>
@@ -202,7 +201,7 @@ export default function HistoryPage() {
 
                 {selectedItem.action_plan?.length > 0 && (
                   <div className="detail-section">
-                    <h3>🚀 Rencana Pengembangan</h3>
+                    <h3>Rencana Pengembangan</h3>
                     <ol className="detail-action-plan">
                       {selectedItem.action_plan.map((action, i) => (
                         <li key={i}>{action}</li>
@@ -213,7 +212,7 @@ export default function HistoryPage() {
 
                 {selectedItem.role_compatibility?.length > 0 && (
                   <div className="detail-section">
-                    <h3>🎯 Rekomendasi Posisi</h3>
+                    <h3>Rekomendasi Posisi</h3>
                     <div className="detail-positions">
                       {selectedItem.role_compatibility.map((role, i) => (
                         <div key={i} className="detail-position-item">

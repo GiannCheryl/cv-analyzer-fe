@@ -27,7 +27,6 @@ export default function HomePage({ onLoginClick, onRegisterClick }) {
 
   return (
     <div className="home-page">
-      {/* Hero Section - Centered */}
       <section className="hero-section">
         <div className="hero-content" style={{ textAlign: "center", maxWidth: "800px", margin: "0 auto" }}>
           <div className="hero-badge" style={{ margin: "0 auto 1.5rem" }}>
@@ -52,7 +51,6 @@ export default function HomePage({ onLoginClick, onRegisterClick }) {
         </div>
       </section>
 
-      {/* Features Section */}
       <section className="features-section">
         <h2 className="section-title-center">Bagaimana Cara Kerjanya?</h2>
         <div className="features-grid">
@@ -66,7 +64,6 @@ export default function HomePage({ onLoginClick, onRegisterClick }) {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="cta-section">
         <h2>Siap Menganalisis CV Anda?</h2>
         <p>Daftar sekarang dan dapatkan analisis pertama Anda secara gratis!</p>
