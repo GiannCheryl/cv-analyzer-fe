@@ -990,6 +990,15 @@ body {
   gap: 0.75rem;
 }
 
+.auth-success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #c3e6cb;
+}
+
 /* User Menu */
 .user-menu {
   position: relative;

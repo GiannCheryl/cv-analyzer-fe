@@ -45,16 +45,10 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const response = await api.post("/api/auth/login", { email, password });
-    console.log("Login response:", response.data);  // debug
-    
     const { token, user } = response.data;
-    console.log("Token:", token);  // debug
     
     if (token) {
       localStorage.setItem("token", token);
-      console.log("Token saved to localStorage");  // debug
-    } else {
-      console.error("No token in response!");  // debug
     }
     
     setUser(user);
@@ -67,10 +61,8 @@ export const AuthProvider = ({ children }) => {
       email,
       password,
     });
-    const { token, user } = response.data;
-    localStorage.setItem("token", token);
-    setUser(user);
-    return user;
+    
+    return response.data;
   };
 
   const logout = () => {

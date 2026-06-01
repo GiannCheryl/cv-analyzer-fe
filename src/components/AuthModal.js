@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
 export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
-  const [mode, setMode] = useState(initialMode); // "login" or "register"
+  const [mode, setMode] = useState(initialMode);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -11,6 +11,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const { login, register } = useAuth();
 
   if (!isOpen) return null;
@@ -18,12 +19,14 @@ export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setError("");
+    setSuccessMessage("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setSuccessMessage("");
 
     try {
       if (mode === "register") {
@@ -37,11 +40,20 @@ export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
           setLoading(false);
           return;
         }
-        await register(formData.name, formData.email, formData.password);
+        
+        const result = await register(formData.name, formData.email, formData.password);
+        setSuccessMessage(result.message || "Registrasi berhasil! Silakan login.");
+        
+        setTimeout(() => {
+          setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+          setSuccessMessage("");
+          setMode("login");
+        }, 2000);
+        
       } else {
         await login(formData.email, formData.password);
+        onClose();
       }
-      onClose();
     } catch (err) {
       setError(
         err.response?.data?.error || 
@@ -56,13 +68,13 @@ export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
   const switchMode = (newMode) => {
     setMode(newMode);
     setError("");
+    setSuccessMessage("");
     setFormData({ name: "", email: "", password: "", confirmPassword: "" });
   };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-        {/* Side-by-side Headers */}
         <div className="modal-header-tabs">
           <button
             className={`header-tab ${mode === "login" ? "active" : ""}`}
@@ -78,7 +90,6 @@ export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
           </button>
         </div>
 
-        {/* Form Content */}
         <div className="modal-body">
           <h2 className="modal-title">
             {mode === "login" ? "Selamat Datang Kembali!" : "Buat Akun Baru"}
@@ -92,6 +103,12 @@ export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
           {error && (
             <div className="auth-error">
               {error}
+            </div>
+          )}
+
+          {successMessage && (
+            <div className="auth-success">
+              {successMessage}
             </div>
           )}
 
