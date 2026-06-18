@@ -351,6 +351,38 @@ export default function AnalyzerPage() {
 
               <div className="result-card">
                 <h3 className="card-title">
+                  Skill yang Perlu Dikembangkan
+                </h3>
+                <div className="skills-section">
+                  {result.skills_analysis.missing_hard_skills.length > 0 && (
+                    <div className="skill-category">
+                      <h4>Hard Skills</h4>
+                      <div className="tag-container">
+                        {result.skills_analysis.missing_hard_skills.map((skill, i) => (
+                          <span key={i} className="tag tag-danger">{skill}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {result.skills_analysis.missing_soft_skills.length > 0 && (
+                    <div className="skill-category">
+                      <h4>Soft Skills</h4>
+                      <div className="tag-container">
+                        {result.skills_analysis.missing_soft_skills.map((skill, i) => (
+                          <span key={i} className="tag tag-warning">{skill}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {result.skills_analysis.missing_hard_skills.length === 0 &&
+                    result.skills_analysis.missing_soft_skills.length === 0 && (
+                      <p className="empty-state success">Semua skill sudah terpenuhi!</p>
+                    )}
+                </div>
+              </div>
+
+              <div className="result-card">
+                <h3 className="card-title">
                   Rekomendasi Posisi Lain
                 </h3>
                 <div className="positions-list">
@@ -364,20 +396,6 @@ export default function AnalyzerPage() {
                     </div>
                   ))}
                 </div>
-              </div>
-
-              <div className="result-card">
-                <h3 className="card-title">
-                  Rencana Pengembangan
-                </h3>
-                <ol className="action-plan">
-                  {result.action_plan?.map((action, i) => (
-                    <li key={i} className="action-item">
-                      <span className="action-number">{i + 1}</span>
-                      <span className="action-text">{action}</span>
-                    </li>
-                  ))}
-                </ol>
               </div>
             </div>
 
@@ -445,34 +463,16 @@ export default function AnalyzerPage() {
 
               <div className="result-card">
                 <h3 className="card-title">
-                  Skill yang Perlu Dikembangkan
+                  Rencana Pengembangan
                 </h3>
-                <div className="skills-section">
-                  {result.skills_analysis.missing_hard_skills.length > 0 && (
-                    <div className="skill-category">
-                      <h4>Hard Skills</h4>
-                      <div className="tag-container">
-                        {result.skills_analysis.missing_hard_skills.map((skill, i) => (
-                          <span key={i} className="tag tag-danger">{skill}</span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {result.skills_analysis.missing_soft_skills.length > 0 && (
-                    <div className="skill-category">
-                      <h4>Soft Skills</h4>
-                      <div className="tag-container">
-                        {result.skills_analysis.missing_soft_skills.map((skill, i) => (
-                          <span key={i} className="tag tag-warning">{skill}</span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {result.skills_analysis.missing_hard_skills.length === 0 &&
-                    result.skills_analysis.missing_soft_skills.length === 0 && (
-                      <p className="empty-state success">Semua skill sudah terpenuhi!</p>
-                    )}
-                </div>
+                <ol className="action-plan">
+                  {result.action_plan?.map((action, i) => (
+                    <li key={i} className="action-item">
+                      <span className="action-number">{i + 1}</span>
+                      <span className="action-text">{action}</span>
+                    </li>
+                  ))}
+                </ol>
               </div>
             </div>
           </div>
