@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 
 export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
@@ -13,6 +13,15 @@ export default function AuthModal({ isOpen, onClose, initialMode = "login" }) {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const { login, register } = useAuth();
+
+  useEffect(() => {
+    if (isOpen) {
+      setMode(initialMode);
+      setError("");
+      setSuccessMessage("");
+      setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+    }
+  }, [isOpen, initialMode]);
 
   if (!isOpen) return null;
 
